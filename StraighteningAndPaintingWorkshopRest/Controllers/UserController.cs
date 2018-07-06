@@ -32,10 +32,10 @@ namespace StraighteningAndPaintingWorkshopRest.Controllers
         
         // POST: api/User
         [HttpPost]
-        public void Post([FromBody]User value)
+        public User Post([FromBody]User value)
         {
             //System.Diagnostics.Debug.WriteLine(value);
-            this.userData.InsertUser(value);
+            return this.userData.InsertUser(value);
         }
 
         // POST: /api/user/login
