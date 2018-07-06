@@ -23,6 +23,20 @@ create table vehicle(license_number varchar(255) not null constraint PK_vehicle 
 						weight float not null,
 						chassis_number varchar(255) not null);
 
+create table work_order(work_order_id int not null Identity(1, 1) constraint PK_work_order Primary Key,
+						description varchar(255) not null,
+						tentative_date date not null,
+						details_price float not null,
+						labor_price float not null,
+						client_identification varchar(255) not null,
+						license_number varchar(255) not null,
+						constraint FK_work_order_client Foreign Key(client_identification) references client(client_identification) on delete cascade on update cascade,
+						constraint FK_work_order_vehicle Foreign Key(license_number) references vehicle(license_number) on delete cascade on update cascade);
+
+
+
+
+
 Create PROCEDURE insert_app_user @email varchar(255), @pass varchar(255), @complete_name varchar(255), @role_id int
 AS
 BEGIN
@@ -43,9 +57,6 @@ BEGIN
 	update client set name=@name, lastname=@lastname, telephone=@telephone, address=@address where client_identification=@client_identification;
 END
 
-
-
-
 Create PROCEDURE insert_vehicle @license_number varchar(255), @color varchar(255), @brand varchar(255), @style varchar(255), @year int, @capacity int, @weight float, @chassis_number varchar(255)
 AS
 BEGIN
@@ -59,3 +70,21 @@ AS
 BEGIN
 	update vehicle set color=@color, brand=@brand, style=@style, year=@year, capacity=@capacity, weight=@weight, chassis_number=@chassis_number where license_number=@license_number;
 END
+
+Create PROCEDURE insert_work_order @description varchar(255), @tentative_date date, @client_identification varchar(255), @license_number varchar(255)
+AS
+BEGIN
+	insert into work_order(description, tentative_date, details_price, labor_price, client_identification, license_number)
+	values(@description, @tentative_date, 0, 0, @client_identification, @license_number);
+
+	SELECT @@IDENTITY AS 'work_order_id';
+END
+
+Create PROCEDURE update_work_order @work_order_id int, @description varchar(255), @tentative_date date, @details_price float, @labor_price float, @client_identification varchar(255), @license_number varchar(255)
+AS
+BEGIN
+	update work_order set description=@description, tentative_date=@tentative_date, details_price=@details_price, labor_price=@labor_price, client_identification=@client_identification, license_number=@license_number where work_order_id = @work_order_id;
+END
+
+
+exec insert_work_order 'Vehiculo ingresado para pintura', '2018-08-08', '1111111111', 'blc194';
