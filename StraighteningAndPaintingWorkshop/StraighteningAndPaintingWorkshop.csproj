@@ -44,11 +44,13 @@
     <Compile Include="data\RoleData.cs" />
     <Compile Include="data\UserData.cs" />
     <Compile Include="data\VehicleData.cs" />
+    <Compile Include="data\WorkDetailData.cs" />
     <Compile Include="data\WorkOrderData.cs" />
     <Compile Include="domain\Client.cs" />
     <Compile Include="domain\Role.cs" />
     <Compile Include="domain\User.cs" />
     <Compile Include="domain\Vehicle.cs" />
+    <Compile Include="domain\WorkDetail.cs" />
     <Compile Include="domain\WorkOrder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

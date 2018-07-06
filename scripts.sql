@@ -33,7 +33,11 @@ create table work_order(work_order_id int not null Identity(1, 1) constraint PK_
 						constraint FK_work_order_client Foreign Key(client_identification) references client(client_identification) on delete cascade on update cascade,
 						constraint FK_work_order_vehicle Foreign Key(license_number) references vehicle(license_number) on delete cascade on update cascade);
 
-
+create table work_detail(work_detail_id int not null Identity(1, 1) constraint PK_work_detail Primary Key,
+						products_price float not null,
+						description varchar(255) not null,
+						work_order_id int not null,
+						constraint FK_work_detail_work_order Foreign Key(work_order_id) references work_order(work_order_id) on delete cascade on update cascade);
 
 
 
@@ -86,5 +90,16 @@ BEGIN
 	update work_order set description=@description, tentative_date=@tentative_date, details_price=@details_price, labor_price=@labor_price, client_identification=@client_identification, license_number=@license_number where work_order_id = @work_order_id;
 END
 
+Create PROCEDURE insert_work_detail @description varchar(255), @work_order_id int
+AS
+BEGIN
+	insert into work_detail(products_price, description, work_order_id) values(0, @description, @work_order_id);
 
-exec insert_work_order 'Vehiculo ingresado para pintura', '2018-08-08', '1111111111', 'blc194';
+	SELECT @@IDENTITY AS 'work_detail_id';
+END
+
+Create PROCEDURE update_work_detail @work_detail_id int, @products_price float, @description varchar(255), @work_order_id int
+AS
+BEGIN
+	update work_detail set products_price=@products_price, description=@description, work_order_id=@work_order_id where work_detail_id = @work_detail_id;
+END
