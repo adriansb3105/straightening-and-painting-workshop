@@ -18,9 +18,9 @@ namespace StraighteningAndPaintingWorkshop.data
             this.connectionString = connectionString;
         }
 
-        public List<WorkOrder> GetWorkOrders()
+        public List<WorkOrder> GetWorkOrders(string licenseNumber)
         {
-            String sqlSelect = "select work_order_id, description, tentative_date, details_price, labor_price, client_identification, license_number from work_order;";
+            String sqlSelect = "select work_order_id, description, tentative_date, details_price, labor_price, client_identification, license_number from work_order where license_number = '"+licenseNumber+"';";
             SqlDataAdapter daWorkOrder = new SqlDataAdapter(sqlSelect, new SqlConnection(connectionString));
             //daUser.SelectCommand.CommandType = CommandType.StoredProcedure;
             DataSet dsWorkOrder = new DataSet();

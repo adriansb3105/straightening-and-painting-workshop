@@ -24,10 +24,10 @@ namespace StraighteningAndPaintingWorkshopRest.Controllers
         }
 
         // GET: api/WorkDetail
-        [HttpGet]
-        public IEnumerable<WorkDetail> Get()
+        [HttpGet("{workOrderId}")]
+        public IEnumerable<WorkDetail> Get(int workOrderId)
         {
-            return this.workDetailData.GetWorkDetails();
+            return this.workDetailData.GetWorkDetails(workOrderId);
         }
         
         // POST: api/WorkDetail

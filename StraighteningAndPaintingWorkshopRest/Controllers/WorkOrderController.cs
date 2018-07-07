@@ -23,11 +23,11 @@ namespace StraighteningAndPaintingWorkshopRest.Controllers
             this.workOrderData = new WorkOrderData(configuration.GetConnectionString("DefaultConnection").ToString());
         }
 
-        // GET: api/WorkOrder
-        [HttpGet]
-        public IEnumerable<WorkOrder> Get()
+        // GET: api/WorkOrder/licenseNumber
+        [HttpGet("{licenseNumber}")]
+        public IEnumerable<WorkOrder> Get(string licenseNumber)
         {
-            return this.workOrderData.GetWorkOrders();
+            return this.workOrderData.GetWorkOrders(licenseNumber);
         }
         
         // POST: api/WorkOrder

@@ -41,12 +41,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="data\ClientData.cs" />
+    <Compile Include="data\RequiredProductData.cs" />
     <Compile Include="data\RoleData.cs" />
     <Compile Include="data\UserData.cs" />
     <Compile Include="data\VehicleData.cs" />
     <Compile Include="data\WorkDetailData.cs" />
     <Compile Include="data\WorkOrderData.cs" />
     <Compile Include="domain\Client.cs" />
+    <Compile Include="domain\RequiredProduct.cs" />
     <Compile Include="domain\Role.cs" />
     <Compile Include="domain\User.cs" />
     <Compile Include="domain\Vehicle.cs" />

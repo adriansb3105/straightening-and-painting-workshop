@@ -39,6 +39,13 @@ create table work_detail(work_detail_id int not null Identity(1, 1) constraint P
 						work_order_id int not null,
 						constraint FK_work_detail_work_order Foreign Key(work_order_id) references work_order(work_order_id) on delete cascade on update cascade);
 
+create table required_product(required_product_id int not null Identity(1, 1) constraint PK_required_product Primary Key,
+							material varchar(255) not null,
+							quantity int not null,
+							price float not null,
+							work_detail_id int not null,
+							constraint FK_required_product_work_detail Foreign Key(work_detail_id) references work_detail(work_detail_id) on delete cascade on update cascade);
+
 
 
 Create PROCEDURE insert_app_user @email varchar(255), @pass varchar(255), @complete_name varchar(255), @role_id int
@@ -103,3 +110,52 @@ AS
 BEGIN
 	update work_detail set products_price=@products_price, description=@description, work_order_id=@work_order_id where work_detail_id = @work_detail_id;
 END
+
+---
+
+Create PROCEDURE update_required_product @required_product_id int, @material varchar(255), @quantity int, @price float, @work_detail_id int
+AS
+BEGIN
+	update required_product set material=@material, quantity=@quantity, price=@price, work_detail_id=@work_detail_id where required_product_id = @required_product_id;
+END
+
+
+
+
+
+
+
+
+
+Create PROCEDURE insert_required_product @material varchar(255), @quantity int, @price float, @work_detail_id int
+AS
+BEGIN
+	Declare @productPrice float;
+	Declare @work_order_id int;
+
+	Begin Transaction transactionForPrices
+		BEGIN TRY
+			insert into required_product(material, quantity, price, work_detail_id) values(@material, @quantity, @price, @work_detail_id);
+			SET @productPrice = @quantity*@price;
+
+			update work_detail set products_price = products_price + @productPrice where work_detail_id = @work_detail_id;
+
+			select @work_order_id = work_order_id from work_detail where work_detail_id = @work_detail_id;
+
+			update work_order set details_price = details_price + @productPrice where work_order_id = @work_order_id;
+
+		END TRY
+		BEGIN CATCH
+			IF @@TRANCOUNT > 0
+				BEGIN
+					ROLLBACK TRANSACTION transactionForPrices;
+				END
+		END CATCH
+    
+	COMMIT TRANSACTION
+END
+
+
+--insert into required_product(material, quantity, price, work_detail_id) values('tela', 2, 3000, 1);
+
+exec insert_required_product 'tela', 2, 3000, 1;
