@@ -36,7 +36,7 @@ namespace StraighteningAndPaintingWorkshop.data
                     List<RequiredProduct> products = new List<RequiredProduct>();
                     String sqlProduct = "select required_product_id, material, quantity, price, work_detail_id from required_product where work_detail_id='" + workDetailId + "';";
 
-                    SqlDataAdapter daRequiredProduct = new SqlDataAdapter(sqlSelect, new SqlConnection(connectionString));
+                    SqlDataAdapter daRequiredProduct = new SqlDataAdapter(sqlProduct, new SqlConnection(connectionString));
                     DataSet dsRequiredProduct = new DataSet();
                     daRequiredProduct.Fill(dsRequiredProduct, "required_product");
                     RequiredProduct requiredProduct = null;
