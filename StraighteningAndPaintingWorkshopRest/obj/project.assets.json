@@ -93,6 +93,15 @@
           "lib/netstandard1.6/Microsoft.AI.DependencyCollector.dll": {}
         }
       },
+      "Microsoft.AspNet.Cors/5.2.6": {
+        "type": "package",
+        "compile": {
+          "lib/net45/System.Web.Cors.dll": {}
+        },
+        "runtime": {
+          "lib/net45/System.Web.Cors.dll": {}
+        }
+      },
       "Microsoft.AspNetCore/2.0.3": {
         "type": "package",
         "dependencies": {
@@ -5108,6 +5117,17 @@
         "lib/netstandard1.6/Microsoft.AI.DependencyCollector.xml",
         "microsoft.applicationinsights.dependencycollector.2.4.1.nupkg.sha512",
         "microsoft.applicationinsights.dependencycollector.nuspec"
+      ]
+    },
+    "Microsoft.AspNet.Cors/5.2.6": {
+      "sha512": "9aZAbHBY8StAwehBYWPs6ewrc4hdyaj6O0cxgPme5vU9eYNz9kAfbX5z6I1LFsnpWzthpsikcJTE1OyAl/JzuQ==",
+      "type": "package",
+      "path": "microsoft.aspnet.cors/5.2.6",
+      "files": [
+        ".signature.p7s",
+        "lib/net45/System.Web.Cors.dll",
+        "microsoft.aspnet.cors.5.2.6.nupkg.sha512",
+        "microsoft.aspnet.cors.nuspec"
       ]
     },
     "Microsoft.AspNetCore/2.0.3": {
@@ -13266,6 +13286,7 @@
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.0": [
+      "Microsoft.AspNet.Cors >= 5.2.6",
       "Microsoft.AspNetCore.All >= 2.0.8",
       "Microsoft.EntityFrameworkCore.Tools >= 2.0.3",
       "Microsoft.NETCore.App >= 2.0.0",
@@ -13280,11 +13301,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\jose.serrano\\Documents\\Projects\\StraighteningAndPaintingWorkshop\\StraighteningAndPaintingWorkshopRest\\StraighteningAndPaintingWorkshopRest.csproj",
+      "projectUniqueName": "D:\\Labs Lenguajes\\StraighteningAndPaintingWorkshop\\StraighteningAndPaintingWorkshopRest\\StraighteningAndPaintingWorkshopRest.csproj",
       "projectName": "StraighteningAndPaintingWorkshopRest",
-      "projectPath": "C:\\Users\\jose.serrano\\Documents\\Projects\\StraighteningAndPaintingWorkshop\\StraighteningAndPaintingWorkshopRest\\StraighteningAndPaintingWorkshopRest.csproj",
+      "projectPath": "D:\\Labs Lenguajes\\StraighteningAndPaintingWorkshop\\StraighteningAndPaintingWorkshopRest\\StraighteningAndPaintingWorkshopRest.csproj",
       "packagesPath": "C:\\Users\\jose.serrano\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\jose.serrano\\Documents\\Projects\\StraighteningAndPaintingWorkshop\\StraighteningAndPaintingWorkshopRest\\obj\\",
+      "outputPath": "D:\\Labs Lenguajes\\StraighteningAndPaintingWorkshop\\StraighteningAndPaintingWorkshopRest\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -13303,8 +13324,8 @@
       "frameworks": {
         "netcoreapp2.0": {
           "projectReferences": {
-            "C:\\Users\\jose.serrano\\Documents\\Projects\\StraighteningAndPaintingWorkshop\\StraighteningAndPaintingWorkshop\\StraighteningAndPaintingWorkshop.csproj": {
-              "projectPath": "C:\\Users\\jose.serrano\\Documents\\Projects\\StraighteningAndPaintingWorkshop\\StraighteningAndPaintingWorkshop\\StraighteningAndPaintingWorkshop.csproj"
+            "D:\\Labs Lenguajes\\StraighteningAndPaintingWorkshop\\StraighteningAndPaintingWorkshop\\StraighteningAndPaintingWorkshop.csproj": {
+              "projectPath": "D:\\Labs Lenguajes\\StraighteningAndPaintingWorkshop\\StraighteningAndPaintingWorkshop\\StraighteningAndPaintingWorkshop.csproj"
             }
           }
         }
@@ -13318,6 +13339,10 @@
     "frameworks": {
       "netcoreapp2.0": {
         "dependencies": {
+          "Microsoft.AspNet.Cors": {
+            "target": "Package",
+            "version": "[5.2.6, )"
+          },
           "Microsoft.AspNetCore.All": {
             "target": "Package",
             "version": "[2.0.8, )"
@@ -13345,5 +13370,17 @@
         "warn": true
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'Microsoft.AspNet.Cors 5.2.6' was restored using '.NETFramework,Version=v4.6.1' instead of the project target framework '.NETCoreApp,Version=v2.0'. This package may not be fully compatible with your project.",
+      "libraryId": "Microsoft.AspNet.Cors",
+      "targetGraphs": [
+        ".NETCoreApp,Version=v2.0"
+      ]
+    }
+  ]
 }

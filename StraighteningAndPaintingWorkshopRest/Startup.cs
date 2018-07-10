@@ -11,6 +11,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using StraighteningAndPaintingWorkshopRest.Data;
 using StraighteningAndPaintingWorkshopRest.Services;
+using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Cors.Infrastructure;
 
 namespace StraighteningAndPaintingWorkshopRest
 {
@@ -40,9 +42,26 @@ namespace StraighteningAndPaintingWorkshopRest
                     options.Conventions.AuthorizePage("/Account/Logout");
                 });
 
+          
             // Register no-op EmailSender used by account confirmation and password reset during development
             // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=532713
             services.AddSingleton<IEmailSender, EmailSender>();
+
+
+            // ********************
+            // Setup CORS
+            // ********************
+            var corsBuilder = new CorsPolicyBuilder();
+            corsBuilder.AllowAnyHeader();
+            corsBuilder.AllowAnyMethod();
+            corsBuilder.AllowAnyOrigin(); // For anyone access.
+            //corsBuilder.WithOrigins("http://localhost:56573"); // for a specific url. Don't add a forward slash on the end!
+            corsBuilder.AllowCredentials();
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("SiteCorsPolicy", corsBuilder.Build());
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -69,6 +88,11 @@ namespace StraighteningAndPaintingWorkshopRest
                     name: "default",
                     template: "{controller}/{action=Index}/{id?}");
             });
+
+            // ********************
+            // USE CORS - might not be required.
+            // ********************
+            app.UseCors("SiteCorsPolicy");
         }
     }
 }
