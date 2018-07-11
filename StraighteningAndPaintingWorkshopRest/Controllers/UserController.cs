@@ -7,10 +7,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using StraighteningAndPaintingWorkshop.domain;
 using StraighteningAndPaintingWorkshop.data;
+using Microsoft.AspNetCore.Cors;
 
 namespace StraighteningAndPaintingWorkshopRest.Controllers
 {
     [Produces("application/json")]
+    [EnableCors("SiteCorsPolicy")]
     [Route("api/user")]
     public class UserController : Controller
     {
